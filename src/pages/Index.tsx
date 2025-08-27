@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import Icon from '@/components/ui/icon';
+import ProductDesigner from '@/components/ProductDesigner';
 
 const Index = () => {
   const [selectedService, setSelectedService] = useState('');
@@ -148,6 +149,15 @@ const Index = () => {
                 <Icon name="Eye" size={20} className="mr-2" />
                 Посмотреть услуги
               </Button>
+              <ProductDesigner 
+                productType="mug"
+                trigger={
+                  <Button size="lg" variant="secondary">
+                    <Icon name="Palette" size={20} className="mr-2" />
+                    Конструктор
+                  </Button>
+                }
+              />
             </div>
           </div>
         </div>
@@ -182,9 +192,20 @@ const Index = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-gray-600">
+                  <CardDescription className="text-gray-600 mb-4">
                     {service.description}
                   </CardDescription>
+                  {(service.id === 'mugs' || service.id === 'tshirts') && (
+                    <ProductDesigner 
+                      productType={service.id === 'mugs' ? 'mug' : 'tshirt'}
+                      trigger={
+                        <Button variant="outline" size="sm" className="w-full">
+                          <Icon name="Palette" size={16} className="mr-2" />
+                          Создать дизайн
+                        </Button>
+                      }
+                    />
+                  )}
                 </CardContent>
               </Card>
             ))}
